@@ -1,0 +1,9 @@
+✅ Marcar os dias em que o hábito foi cumprido (tipo um calendário de check).
+
+📊 Mostrar o progresso de cada hábito (ex: 5/7 dias completos).
+
+🗑️ Botão para excluir hábitos.
+
+💾 Separar os dados por usuário (futuramente com login).
+
+🎨 Melhorar o visual com Bootstrap ou Tailwind.
