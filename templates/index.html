@@ -18,13 +18,35 @@
         <button type="submit">Add</button>
     </form>
 
-
-    <ul>
-        {% for habit in habits %}
-        <li>{{ habit.name}}</li>
-        {% else %}
-        <li>Nenhum habito cadastrado ainda</li>
-        {% endfor %}
-    </ul>
+    {%if habits %}
+    <table>
+        <thead>
+            <tr>
+                <th>Hábito</th>
+                {% for day in days %}
+                <th>{{ day }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for habit in habits %}
+            <tr>
+                <td>{{ habit.name }}</td>
+                {% for day in days %}
+                <td>
+                    <form action="/toggle"  method="post" style="display: inline;">
+                        <input type="hidden" name="habit_name" value="{{ habit.name }}">
+                        <input type="hidden" name="date" value="{{ day }}">
+                        <input type="checkbox" name="done" onchange="this.form.submit()"  {% if day in habit.days %}checked{% endif %}>
+                    </form>
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Nenhum Hábito cadastrado ainda</p>
+        {% endif %}
 </body>
 </html>
