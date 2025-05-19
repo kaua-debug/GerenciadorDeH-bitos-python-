@@ -1,52 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habit-tracker</title>
-    <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8" />
+  <title>Gerenciador de Hábitos</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Habit Tracker</h1>
+  <h1>📋 Meus Hábitos</h1>
 
-    <form action="/add" method="post">
-        <input 
-        type="text" 
-        name="Habit" 
-        placeholder="New habit" 
-        required>
-        <button type="submit">Add</button>
-    </form>
+  <form method="post" action="/add">
+    <input type="text" name="Habit" placeholder="Novo hábito" required />
+    <button type="submit">Adicionar</button>
+  </form>
 
-    {%if habits %}
-    <table>
-        <thead>
-            <tr>
-                <th>Hábito</th>
-                {% for day in days %}
-                <th>{{ day }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for habit in habits %}
-            <tr>
-                <td>{{ habit.name }}</td>
-                {% for day in days %}
-                <td>
-                    <form action="/toggle"  method="post" style="display: inline;">
-                        <input type="hidden" name="habit_name" value="{{ habit.name }}">
-                        <input type="hidden" name="date" value="{{ day }}">
-                        <input type="checkbox" name="done" onchange="this.form.submit()"  {% if day in habit.days %}checked{% endif %}>
-                    </form>
-                </td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <p>Nenhum Hábito cadastrado ainda</p>
-        {% endif %}
+  <table>
+    <thead>
+      <tr>
+        <th>Hábito</th>
+        {% for day in days %}
+          <th>{{ day[5:] }}</th>  <!-- mostra apenas MM-DD -->
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for habit in habits %}
+      <tr>
+        <td>
+          {{ habit.name }}
+          <form method="POST" action="/delete" style="display:inline;">
+            <input type="hidden" name="habit_name" value="{{ habit.name }}">
+            <button type="submit" title="Excluir hábito" style="background:none; border:none; color:#e74c3c; cursor:pointer; font-size:1.1rem;">🗑️</button>
+          </form>
+          <br><small>{{ habit.progress }}/{{ days|length }} dias</small>
+        </td>
+        {% for day in days %}
+        <td>
+          <form method="POST" action="/toggle">
+            <input type="hidden" name="habit_name" value="{{ habit.name }}">
+            <input type="hidden" name="date" value="{{ day }}">
+            <input type="checkbox" onchange="this.form.submit()" {% if day in habit.days %}checked{% endif %}>
+          </form>
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </body>
 </html>

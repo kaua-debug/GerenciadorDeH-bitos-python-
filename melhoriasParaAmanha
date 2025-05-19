@@ -1,9 +1,20 @@
- Marcar os dias em que o hábito foi cumprido (tipo um calendário de check). ok✅
+✅ Hoje (19/05/2025):
+Melhoramos o visual com Bootstrap.
 
-📊 Mostrar o progresso de cada hábito (ex: 5/7 dias completos).
+Adicionamos botão 🗑️ para excluir hábitos.
 
-🗑️ Botão para excluir hábitos.
+Começamos a implementar login com Flask-Login.
 
-💾 Separar os dados por usuário (futuramente com login).
+Criamos as páginas de login e registro.
 
-🎨 Melhorar o visual com Bootstrap ou Tailwind.
+Começamos a separar os hábitos por usuário
+
+📌 Amanhã:
+Finalizar login real com Flask-Login.
+
+Garantir que cada usuário veja só seus hábitos.
+
+Proteger rotas para exigir login.
+
+(Se der tempo) Criar uma API JSON com os hábitos do usuário.
+
