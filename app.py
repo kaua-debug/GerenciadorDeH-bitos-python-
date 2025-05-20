@@ -34,7 +34,14 @@ def get_users():
     if not os.path.exists(USERS_FILE):
         return {}
     with open(USERS_FILE, 'r', encoding='utf-8') as f:
-        return json.load(f)
+        try:
+            data = json.load(f)
+            if isinstance(data, dict):
+                return data
+            return {}  # retorna dicionário vazio se for inválido
+        except json.JSONDecodeError:
+            return {}
+
 
 
 def save_user(username, password):
@@ -55,6 +62,16 @@ def save_habits(data):
     with open(DATA_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2)
 
+def get_user_habits():
+    data = load_habits()
+    return data.get(current_user.id, [])
+
+def save_user_habits(habits):
+    data = load_habits()
+    data[current_user.id] = habits
+    save_habits(data)
+
+
 
 def get_last_days(n=7):
     today = datetime.today()
@@ -64,8 +81,7 @@ def get_last_days(n=7):
 @app.route('/')
 @login_required
 def index():
-    data = load_habits()
-    habits = data.get(current_user.id, [])
+    habits = get_user_habits()
     days = get_last_days()
 
     for habit in habits:
@@ -78,12 +94,10 @@ def index():
 @login_required
 def add():
     habit_name = request.form.get('Habit')
-    data = load_habits()
-    user_habits = data.get(current_user.id, [])
+    habits = get_user_habits()
     if habit_name:
-        user_habits.append({"name": habit_name, "days": []})
-        data[current_user.id] = user_habits
-        save_habits(data)
+        habits.append({"name": habit_name, "days": []})
+        save_user_habits(habits)
     return redirect('/')
 
 
@@ -92,8 +106,7 @@ def add():
 def toggle():
     habit_name = request.form['habit_name']
     date = request.form['date']
-    data = load_habits()
-    habits = data.get(current_user.id, [])
+    habits = get_user_habits()
 
     for habit in habits:
         if habit['name'] == habit_name:
@@ -103,8 +116,7 @@ def toggle():
                 habit['days'].append(date)
             break
 
-    data[current_user.id] = habits
-    save_habits(data)
+    save_user_habits(habits)
     return redirect('/')
 
 
@@ -113,10 +125,9 @@ def toggle():
 def delete():
     habit_name = request.form['habit_name']
     data = load_habits()
-    habits = data.get(current_user.id, [])
+    habits = get_user_habits()
     habits = [h for h in habits if h['name'] != habit_name]
-    data[current_user.id] = habits
-    save_habits(data)
+    save_user_habits(habits)
     return redirect('/')
 
 
@@ -145,6 +156,14 @@ def register():
         login_user(User(username))
         return redirect('/')
     return render_template('register.html')
+
+
+@app.route('/api/habits')
+@login_required
+def api_habits():
+    habits = get_user_habits()
+    return {"habits": habits}
+
 
 
 @app.route('/logout')
