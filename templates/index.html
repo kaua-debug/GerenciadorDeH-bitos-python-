@@ -2,8 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gerenciador de Hábitos</title>
   <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
   <h1>📋 Meus Hábitos</h1>
@@ -18,8 +20,7 @@
       <tr>
         <th>Hábito</th>
         {% for day in days %}
-          <th>{{ day[5:] }}</th>  <!-- mostra apenas MM-DD -->
-        {% endfor %}
+          <th>{{ day[5:] }}</th>  {% endfor %}
       </tr>
     </thead>
     <tbody>
@@ -27,9 +28,9 @@
       <tr>
         <td>
           {{ habit.name }}
-          <form method="POST" action="/delete" style="display:inline;">
+          <form method="POST" action="/delete" class="delete-form">
             <input type="hidden" name="habit_name" value="{{ habit.name }}">
-            <button type="submit" title="Excluir hábito" style="background:none; border:none; color:#e74c3c; cursor:pointer; font-size:1.1rem;">🗑️</button>
+            <button type="submit" title="Excluir hábito">🗑️</button>
           </form>
           <br><small>{{ habit.progress }}/{{ days|length }} dias</small>
         </td>

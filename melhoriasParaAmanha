@@ -1,20 +1,20 @@
-✅ Hoje (19/05/2025):
-Melhoramos o visual com Bootstrap.
+(19/05/2025):
+Melhoramos o visual com Bootstrap. ✅
 
-Adicionamos botão 🗑️ para excluir hábitos.
+Adicionamos botão 🗑️ para excluir hábitos. ✅
 
-Começamos a implementar login com Flask-Login.
+Começamos a implementar login com Flask-Login.✅
 
-Criamos as páginas de login e registro.
+Criamos as páginas de login e registro.✅
 
-Começamos a separar os hábitos por usuário
+Começamos a separar os hábitos por usuário✅
 
-📌 Amanhã:
-Finalizar login real com Flask-Login.
+(20/05/2025):
+Finalizar login real com Flask-Login. ✅
 
-Garantir que cada usuário veja só seus hábitos.
+Garantir que cada usuário veja só seus hábitos. ✅
 
-Proteger rotas para exigir login.
+Proteger rotas para exigir login. ✅
 
-(Se der tempo) Criar uma API JSON com os hábitos do usuário.
+(Se der tempo) Criar uma API JSON com os hábitos do usuário. ✅
 

@@ -1,0 +1,157 @@
+/* General Body Styles */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* Dark futuristic gradient */
+  color: #e0e0e0; /* Light gray for text */
+  overflow: hidden; /* Prevent scrollbar from background animations */
+  position: relative;
+}
+
+/* Background Animation - Optional but enhances tech feel */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top left, rgba(121, 240, 201, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at bottom right, rgba(147, 102, 237, 0.2) 0%, transparent 50%);
+  animation: backgroundPulse 15s infinite alternate;
+  z-index: -1;
+}
+
+@keyframes backgroundPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Glass Card Styling */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08); /* Slightly visible white for glass effect */
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Subtle border for definition */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Stronger shadow for depth */
+  backdrop-filter: blur(10px); /* The core glass effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+  padding: 40px;
+  width: 380px;
+  max-width: 90%;
+  text-align: center;
+  animation: fadeInScale 0.8s ease-out; /* Entry animation */
+  position: relative; /* For potential future elements */
+  z-index: 1;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Heading Styles */
+.glass-card h2 {
+  color: #9366ed; /* Vibrant purple for heading */
+  margin-bottom: 30px;
+  font-size: 2.2em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(147, 102, 237, 0.7); /* Glow effect */
+}
+
+/* Form Group Styles */
+.form-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #b0b0b0; /* Slightly darker gray for labels */
+  font-size: 0.95em;
+  font-weight: 400;
+}
+
+/* Input Field Styles */
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: calc(100% - 20px); /* Adjust for padding */
+  padding: 12px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+  font-size: 1.1em;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group input[type="password"]::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+  border-color: #79f0c9; /* Cyan on focus */
+  box-shadow: 0 0 15px rgba(121, 240, 201, 0.5); /* Glow on focus */
+}
+
+/* Button Styles */
+button[type="submit"] {
+  background: linear-gradient(45deg, #79f0c9, #9366ed); /* Gradient button */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-3px); /* Lift effect on hover */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Login Link Styles */
+.login-link {
+  margin-top: 25px;
+  font-size: 0.9em;
+}
+
+.login-link a {
+  color: #a37ee8; /* Lighter purple for link */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+  color: #79f0c9; /* Cyan on hover */
+  text-decoration: underline;
+}
